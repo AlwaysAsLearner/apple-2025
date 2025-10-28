@@ -58,12 +58,24 @@ body {
   @apply flex justify-between items-center
 }
 
+@utility col-center {
+  @apply flex flex-col justify-center items-center
+}
+
+@utility base-semibold {
+  @apply text-base text-dark-100 font-semibold
+}
+
+@utility h3-semibold {
+  @apply text-xl text-dark-100 font-semibold
+}
+
 @layer components {
    header {
-    @apply w-screen min-h-[7vh]    fixed top-0 left-0 z-50    flex-center   bg-black;
+    @apply w-screen min-h-[7vh]    fixed top-0 left-0 z-50    flex-center   bg-black/10 backdrop-blur-2xl;
    
     nav {
-      @apply container    mx-auto px-5 2xl:px-10   flex-between;
+      @apply container    mx-auto px-5 2xl:px-14   flex-between;
 
       img {
         @apply cursor-pointer   hover:-translate-y-0.5 transition-all duration-300 ease-in-out;
@@ -81,5 +93,31 @@ body {
         }
       }
     }
+  }
+
+  #hero{
+    @apply h-fit  mt-40 lg:mt-20 2xl:mt-[16vh] mb-40     col-center;
+    
+    div {
+      h1{
+        @apply text-center lg:text-3xl xl:text-5xl text-white font-semibold;
+      }
+
+      img{
+        @apply container max-lg:w-2/3 xl:w-[60%] h-auto    mx-auto  ;
+      }
+    }
+
+    video{
+        @apply mx-auto lg:-mb-24 lg:-mt-2 w-full lg:w-[90%] h-auto;
+      }
+
+      button {
+        @apply z-10 mb-5 mx-auto py-2 px-6   bg-[#0071e3] hover:bg-white     text-lg text-white hover:text-black font-semibold   rounded-full  transition-all duration-300 ease-out
+      }
+
+      p{
+        @apply z-10 base-semibold lg:h3-semibold text-center 
+      }
   }
 }
