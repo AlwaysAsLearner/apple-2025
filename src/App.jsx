@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from './components/Navbar'
 
 const App = () => {
   return (
-    <h1>Macbook Pro 2025!</h1>
+    <main>
+      <Navbar />
+    </main>
   )
 }
 
