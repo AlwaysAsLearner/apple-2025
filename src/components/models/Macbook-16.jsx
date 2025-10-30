@@ -9,6 +9,8 @@ import * as THREE from 'three'
 export default function MacbookModel16(props) {
   const { nodes, materials, scene } = useGLTF('/models/macbook-16-transformed.glb')
   const texture = useTexture("/screen.png");
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.needsUpdate = true 
 
   const { color } = useMacbookAnimStore();
 
