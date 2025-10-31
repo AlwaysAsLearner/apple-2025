@@ -1,28 +1,25 @@
 
-
 import React, { useEffect } from 'react'
-import { useGLTF, useTexture } from '@react-three/drei'
-import useMacbookAnimStore from '../../store';
-import { noChangeParts } from '../../constants';
+import { ScreenVideoTexture, useGLTF, useVideoTexture } from '@react-three/drei'
+import useMacbookAnimStore from '../../store'
+import { noChangeParts } from '../../constants'
 import * as THREE from 'three'
 
-export default function MacbookModel16(props) {
-  const { nodes, materials, scene } = useGLTF('/models/macbook-16-transformed.glb')
-  const texture = useTexture("/screen.png");
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.needsUpdate = true 
+export default function MacbookModel(props) {
+  const { color, texture } = useMacbookAnimStore()
+  const { nodes, materials, scene } = useGLTF('/models/macbook-transformed.glb')
 
-  const { color } = useMacbookAnimStore();
+  const screenTexture = useVideoTexture(texture)
 
   useEffect(() => {
-    scene.traverse((child) => {
-      if(child.isMesh){
-        if(!noChangeParts.includes(child.name)){
-          child.material.color = new THREE.Color(color)
+      scene.traverse((child) => {
+        if(child.isMesh){
+          if(!noChangeParts.includes(child.name)){
+            child.material.color = new THREE.Color(color)
+          }
         }
-      }
-    })
-  }, [color])
+      })
+    }, [color])
   return (
     <group {...props} dispose={null}>
       <mesh geometry={nodes.Object_10.geometry} material={materials.PaletteMaterial001} rotation={[Math.PI / 2, 0, 0]} />
@@ -42,12 +39,12 @@ export default function MacbookModel16(props) {
       <mesh geometry={nodes.Object_82.geometry} material={materials.gMtYExgrEUqPfln} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_96.geometry} material={materials.PaletteMaterial003} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_107.geometry} material={materials.JvMFZolVCdpPqjj} rotation={[Math.PI / 2, 0, 0]} />
-      <mesh geometry={nodes.Object_123.geometry} material={materials.sfCQkHOWyrsLmor} rotation={[Math.PI / 2, 0, 0]} >
-       <meshBasicMaterial map={texture} />
+      <mesh geometry={nodes.Object_123.geometry} rotation={[Math.PI / 2, 0, 0]}>
+        <meshBasicMaterial map={screenTexture} />
       </mesh>
       <mesh geometry={nodes.Object_127.geometry} material={materials.ZCDwChwkbBfITSW} rotation={[Math.PI / 2, 0, 0]} />
     </group>
   )
 }
 
-useGLTF.preload('/models/macbook-16-transformed.glb')
+useGLTF.preload('/models/macbook-transformed.glb')
